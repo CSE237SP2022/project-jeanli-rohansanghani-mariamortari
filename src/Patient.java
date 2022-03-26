@@ -40,4 +40,15 @@ public class Patient {
 	public int getPatientId() {
 		return patient_id;
 	}
+	
+	public boolean isOverweight(){
+		double overweight_bmi_index=25;
+		double patient_body_mass_index=(weight)/(Math.pow(height,2));
+		
+		if (patient_body_mass_index>=overweight_bmi_index){
+			return true;
+		}
+		
+		return false;
+		}
 }
