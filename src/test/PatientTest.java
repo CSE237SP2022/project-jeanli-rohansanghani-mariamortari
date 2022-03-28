@@ -46,5 +46,11 @@ class PatientTest {
 		double id = p1.getPatientId();
 		assertEquals(13,id);
 	}
+	
+	@Test
+	void testCalculateBMI() {
+		double patientBMI = p1.calculateBMI();
+		assertEquals(31.25,patientBMI,0.05);
+	}
 
 }

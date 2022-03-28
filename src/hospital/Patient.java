@@ -41,4 +41,9 @@ public class Patient {
 	public int getPatientId() {
 		return patient_id;
 	}
+	
+	public double calculateBMI(){
+		double bmi = weight/(Math.pow(height, 2));
+		return bmi;
+	}
 }
