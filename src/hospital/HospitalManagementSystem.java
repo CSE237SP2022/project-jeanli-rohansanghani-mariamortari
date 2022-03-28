@@ -5,21 +5,28 @@ import java.util.Scanner;
 
 public class HospitalManagementSystem {
 	
-	public static ArrayList<Patient> patientList = new ArrayList<Patient>();
-	static boolean keepGoing = true;
+	private ArrayList<Patient> patientList;
+	private boolean keepGoing;
+	
+	public HospitalManagementSystem(ArrayList<Patient> patientList, boolean keepGoing) {
+		this.patientList = patientList;
+		this.keepGoing = keepGoing;
+	}
 
 	public static void main(String[] args) {
+		ArrayList<Patient> patientList = new ArrayList<Patient>();
+		HospitalManagementSystem hospital = new HospitalManagementSystem(patientList, true);
 		
-		while(keepGoing) {
-			menuControls();
+		while(hospital.keepGoing) {
+			hospital.menuControls();
 		}
-		if(keepGoing == false) {
+		if(hospital.keepGoing == false) {
 			System.out.println("Hospital Management System Session Closed");
 		}
 		
 	}
 	
-	public static void menuControls() {
+	public void menuControls() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("-------------------------------------------------------");
 		System.out.println("Hospital Management System");
@@ -37,7 +44,7 @@ public class HospitalManagementSystem {
 		
 	}
 	
-	public static void addPatient() {
+	public void addPatient() {
 		patientList.add(generatePatient());
 		System.out.println("");
 		System.out.println("");
@@ -46,7 +53,7 @@ public class HospitalManagementSystem {
 		
 	}
 	
-	public static void printPatientList() {
+	public void printPatientList() {
 		int counter = 1;
 		for(Patient val: patientList) {
 			if(val!=null) {
@@ -64,7 +71,7 @@ public class HospitalManagementSystem {
 		}
 	}
 	
-	public static Patient generatePatient() {
+	public Patient generatePatient() {
 		Scanner in = new Scanner(System.in);
 		
 		String patientFirstName = getFirstNameFromInput(in);
@@ -87,18 +94,17 @@ public class HospitalManagementSystem {
 		
 	}
 	
-	
-	public static String getFirstNameFromInput(Scanner in) {
+	public String getFirstNameFromInput(Scanner in) {
 		System.out.println("Enter Patient's First Name");
 		return in.next();
 	}
 	
-	public static String getLastNameFromInput(Scanner in) {
+	public String getLastNameFromInput(Scanner in) {
 		System.out.println("Enter Patient's Last Name");
 		return in.next();
 	}
 	
-	public static int getAgeFromInput(Scanner in) {
+	public int getAgeFromInput(Scanner in) {
 		boolean inputAnInt = false;
 		int patientAge = 0;
 		while(!inputAnInt) {
@@ -114,17 +120,17 @@ public class HospitalManagementSystem {
 		return patientAge;
 	}
 	
-	public static String getSexFromInput(Scanner in) {
+	public String getSexFromInput(Scanner in) {
 		System.out.println("Enter Patient's Sex");
 		return in.next();
 	}
 	
-	public static double getWeightFromInput(Scanner in) {
+	public double getWeightFromInput(Scanner in) {
 		boolean inputANumber = false;
 		double patientWeight = 0;
 		while(!inputANumber) {
 			System.out.println("Enter Patient's Weight (in kilograms)");
-			if(in.hasNextInt()) {
+			if(in.hasNextDouble()) {
 				patientWeight = in.nextDouble();
 				inputANumber = true;
 			} else {
@@ -135,12 +141,12 @@ public class HospitalManagementSystem {
 		return patientWeight;
 	}
 	
-	public static double getHeightFromInput(Scanner in) {
+	public double getHeightFromInput(Scanner in) {
 		boolean inputANumber = false;
 		double patientHeight = 0;
 		while(!inputANumber) {
 			System.out.println("Enter Patient's Height (in meters)");
-			if(in.hasNextInt()) {
+			if(in.hasNextDouble()) {
 				patientHeight = in.nextDouble();
 				inputANumber = true;
 			} else {
@@ -151,7 +157,7 @@ public class HospitalManagementSystem {
 		return patientHeight;
 	}
 	
-	public static int getPatientIDFromInput(Scanner in) {
+	public int getPatientIDFromInput(Scanner in) {
 		System.out.println("Enter Patient's ID");
 		return in.nextInt();
 	}
