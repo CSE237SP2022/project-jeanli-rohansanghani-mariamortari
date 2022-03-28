@@ -1,6 +1,8 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import hospital.Patient;
@@ -8,13 +10,23 @@ import hospital.Patient;
 class PatientTest {
 	
 	
-	private Patient p1= new Patient("bob",36,"male",80.0,1.60,13);
+	private Patient p1;
 	
+	@BeforeEach
+	void setup() {
+		p1 = new Patient("bob","jones",36,"male",80.0,1.60,13);
+	}
 	
 	@Test
-	void testGetName() {
-		String name = p1.getName();
-		assertTrue("bob".equals(name));
+	void testGetFirstName() {
+		String firstName = p1.getFirstName();
+		assertTrue("bob".equals(firstName));
+	}
+	
+	@Test
+	void testGetLastName() {
+		String lastName = p1.getLastName();
+		assertTrue("jones".equals(lastName));
 	}
 	
 	@Test
@@ -32,18 +44,18 @@ class PatientTest {
 	@Test 
 	void testGetWeight() {
 		double weight = p1.getWeight();
-		assertEquals(80,weight);
+		assertEquals(80,weight,0.05);
 	}
 	
 	@Test
 	void testGetHeight() {
 		double height = p1.getHeight();
-		assertEquals(1.60,height);
+		assertEquals(1.60,height,0.05);
 	}
 	
 	@Test 
 	void testGetPatientId() {
-		double id = p1.getPatientId();
+		int id = p1.getPatientId();
 		assertEquals(13,id);
 	}
 
