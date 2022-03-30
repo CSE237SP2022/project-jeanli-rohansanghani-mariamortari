@@ -3,6 +3,10 @@ project-jeanli-rohansanghani-mariamortari created by GitHub Classroom
 
 By: Jean Li, Maria Mortari, Rohan Sanghani
 
+We've created a hospital management system. The aim is to help hospitals digitize their patient and staff information.
+Our target audience is hospital administration and doctors. Our patient class includes basic information about the patient such as 
+name, age, height, weight, sex, and BMI. 
+
 ## 1st Iteration
 
 ### What user stories were completed this iteration?
