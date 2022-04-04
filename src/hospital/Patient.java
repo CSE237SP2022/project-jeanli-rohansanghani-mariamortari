@@ -9,8 +9,9 @@ public class Patient {
 	private double weight; //in kilograms
 	private double height; //in meters
 	private int patientID;
+	private double bmi;
 	
-	public Patient(String firstName, String lastName, int age, String sex, double weight, double height,int patientID) {
+	public Patient(String firstName, String lastName, int age, String sex, double weight, double height,int patientID,double bmi) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
@@ -18,6 +19,7 @@ public class Patient {
 		this.weight = weight;
 		this.height = height;
 		this.patientID = patientID;
+		this.bmi = bmi;
 	}
 	
 	public String getFirstName() {
