@@ -44,6 +44,7 @@ public class HospitalManagementSystem {
 		}
 		if(input.equals("W")) {
 			assessBMI();
+		}
 		if(input.equals("D")) {
 			deletePatient();
 		}
@@ -131,7 +132,7 @@ public class HospitalManagementSystem {
 		for(Patient val: patientList) {
 			if(val!=null) {
 				System.out.println(counter + ". ");
-				System.out.println("Patient's Name =   " + "" + ((Patient) val).getFirstName() + "" + ((Patient) val).getLastName());
+				System.out.println("Patient's Name =   " + "" + ((Patient) val).getFirstName() + " " + ((Patient) val).getLastName());
 				System.out.println("Patient's Age =   " + "" + ((Patient) val).getAge());
 				System.out.println("Patient's Sex =   " + "" + ((Patient) val).getSex());
 				System.out.println("Patient's Weight (in kilograms) =   " + "" + ((Patient) val).getWeight());
