@@ -7,6 +7,8 @@ public class HospitalManagementSystem {
 	
 	private ArrayList<Patient> patientList;
 	private boolean keepGoing;
+	private double underweightThreshold = 18.4;
+	private double overweightThreshold = 25.0;
 	
 	public HospitalManagementSystem(ArrayList<Patient> patientList, boolean keepGoing) {
 		this.patientList = patientList;
@@ -31,12 +33,16 @@ public class HospitalManagementSystem {
 		System.out.println("-------------------------------------------------------");
 		System.out.println("Hospital Management System");
 		System.out.println("Select A to Add Patient to the System");
+		System.out.println("Select W to Assess the BMI of a Patient");
 		System.out.println("Select X to exit Hospital System");
 
 		
 		String input = in.nextLine();
 		if(input.equals("A")) {
 			addPatient();
+		}
+		if(input.equals("W")) {
+			assessBMI();
 		}
 		if(input.equals("X")) {
 			keepGoing = false;
@@ -51,6 +57,50 @@ public class HospitalManagementSystem {
 		System.out.println("List of Patients in the System: ");
 		printPatientList();
 		
+	}
+	
+	public void assessBMI() {
+		if(patientList.isEmpty()) {
+			System.out.println("Unable to assess patient since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
+			System.out.println("");
+			System.out.println("");
+			menuControls();
+		}else {
+			Scanner in = new Scanner(System.in);
+			System.out.println("Please type the ID number of the patient you wish to assess the BMI of from the system");
+			System.out.println("");
+			System.out.println("");
+			printPatientList();
+			System.out.println("");
+			System.out.println("");
+			int id_patientToAssess = in.nextInt();
+			printBMI(id_patientToAssess);
+		menuControls();
+		}
+	}
+	
+	public void printBMI(int ID) {
+		for (Patient val: patientList) {
+			if(val.getPatientId() == ID) {
+				double BMI = val.calculateBMI();
+				System.out.println("This patient has a BMI of " + BMI);
+				System.out.println(assessWeightClass(BMI));
+				System.out.println("");
+				System.out.println("");
+			}
+		}
+	}
+	
+	public String assessWeightClass(double BMI) {
+		String weightClass = "Something went wrong.";
+		if(BMI < underweightThreshold) {
+			weightClass = "This patient is underweight.";
+		} else if (BMI >= overweightThreshold) {
+			weightClass = "This patient is overweight.";
+		} else {
+			weightClass = "This patient is neither underweight nor overweight.";
+		}
+		return weightClass;
 	}
 	
 	public void printPatientList() {
