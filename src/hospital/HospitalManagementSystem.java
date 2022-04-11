@@ -34,6 +34,7 @@ public class HospitalManagementSystem {
 		System.out.println("Hospital Management System");
 		System.out.println("Select A to Add Patient to the System");
 		System.out.println("Select W to Assess the BMI of a Patient");
+		System.out.println("Select D to Delete Patient from the System");
 		System.out.println("Select X to exit Hospital System");
 
 		
@@ -43,6 +44,8 @@ public class HospitalManagementSystem {
 		}
 		if(input.equals("W")) {
 			assessBMI();
+		if(input.equals("D")) {
+			deletePatient();
 		}
 		if(input.equals("X")) {
 			keepGoing = false;
@@ -57,6 +60,26 @@ public class HospitalManagementSystem {
 		System.out.println("List of Patients in the System: ");
 		printPatientList();
 		
+	}
+	public void deletePatient() {
+		if(patientList.isEmpty()) {
+			System.out.println("Unable to remove patient since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
+			System.out.println("");
+			System.out.println("");
+			menuControls();
+		}else {
+			Scanner in = new Scanner(System.in);
+			System.out.println("Please type the ID number of the patient you wish to remove from the system");
+			System.out.println("");
+			System.out.println("");
+			printPatientList();
+			System.out.println("");
+			System.out.println("");
+			int id_patientToRemove = in.nextInt();
+			patientList.removeIf(patient -> patient.getPatientId() == id_patientToRemove);
+			
+		}
+		menuControls();
 	}
 	
 	public void assessBMI() {
