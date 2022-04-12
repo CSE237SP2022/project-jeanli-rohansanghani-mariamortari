@@ -14,7 +14,7 @@ class PatientTest {
 	
 	@BeforeEach
 	void setup() {
-		p1 = new Patient("bob","jones",36,"male",80.0,1.60,13);
+		p1 = new Patient("bob","jones",36,"male",80.0,1.60,"1345");
 	}
 	
 	@Test
@@ -55,8 +55,8 @@ class PatientTest {
 	
 	@Test 
 	void testGetPatientId() {
-		int id = p1.getPatientId();
-		assertEquals(13,id);
+		String id = p1.getPatientId();
+		assertEquals("1345",id);
 	}
 	
 	@Test

@@ -8,9 +8,9 @@ public class Patient {
 	private String sex;
 	private double weight; //in kilograms
 	private double height; //in meters
-	private int patientID;
+	private String patientID;
 	
-	public Patient(String firstName, String lastName, int age, String sex, double weight, double height,int patientID) {
+	public Patient(String firstName, String lastName, int age, String sex, double weight, double height,String patientID) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
@@ -44,7 +44,7 @@ public class Patient {
 		return height;
 	}
 	
-	public int getPatientId() {
+	public String getPatientId() {
 		return patientID;
 	}
 	
