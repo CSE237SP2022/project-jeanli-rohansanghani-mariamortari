@@ -72,11 +72,10 @@ class HospitalManagementSystemTest {
 	}
 	
 	@Test
-	void testGetPatientIDFromInput() {
-		System.out.println("Enter 123");
-		int ID = hospital.getPatientIDFromInput(in);
-		
-		assertEquals(123, ID);
+	void testGeneratePatientId() {
+		String patientIdCreatedBySystem = hospital.generatePatientId();
+		Patient p1 = new Patient("bob","jones",36,"male",80.0,1.60,patientIdCreatedBySystem);	
+		assertEquals(patientIdCreatedBySystem, p1.getPatientId());
 	}
 
 }

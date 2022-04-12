@@ -64,17 +64,23 @@ public class HospitalManagementSystem {
 			menuControls();
 		}else {
 			Scanner in = new Scanner(System.in);
-			System.out.println("Please type the ID number of the patient you wish to remove from the system");
-			System.out.println("");
-			System.out.println("");
+			System.out.println("List of patients currently in the system:");
 			printPatientList();
 			System.out.println("");
-			System.out.println("");
-			int id_patientToRemove = in.nextInt();
-			patientList.removeIf(patient -> patient.getPatientId() == id_patientToRemove);
-			
+			System.out.println("Please type the ID number of the patient you wish to remove from the system");
+			String patientIdUserInput = Integer.toString(in.nextInt());
+			int indexDelete = 0;
+			boolean changed =false;
+			for(Patient patient:patientList) {
+				if(patient.getPatientId().equals(patientIdUserInput)) {
+					indexDelete = patientList.indexOf(patient);
+					changed =true;
+				}
+			}if(changed) {
+			patientList.remove(indexDelete);
+			System.out.println("Patient has been deleted from the system");
+			}
 		}
-		menuControls();
 	}
 	
 	public void printPatientList() {
@@ -110,7 +116,7 @@ public class HospitalManagementSystem {
 		
 		double patientHeight = getHeightFromInput(in);
 		
-		int patientID = getPatientIDFromInput(in);
+		String patientID = generatePatientId();
 		
 		Patient patient = new Patient(patientFirstName,patientLastName,patientAge,patientSex,patientWeight,patientHeight,patientID);
 		
@@ -180,10 +186,26 @@ public class HospitalManagementSystem {
 		}
 		return patientHeight;
 	}
+	public boolean isPatientIdUnique(String patientIdToCheckFor) {
+		for(Patient patient:patientList) {
+			if(patient.getPatientId().equals(patientIdToCheckFor)) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
-	public int getPatientIDFromInput(Scanner in) {
-		System.out.println("Enter Patient's ID");
-		return in.nextInt();
+	public String generatePatientId() {
+		boolean unique=true;
+		String patient_Id="";
+		for(int i=0;i<4;i++) {
+			int randomNumber = (int)((Math.random() * 9) + 1);
+			patient_Id=patient_Id+Integer.toString(randomNumber);
+		}
+		if(isPatientIdUnique(patient_Id)==false) {
+			generatePatientId();
+		}
+		return patient_Id;
 	}
 	
 	
