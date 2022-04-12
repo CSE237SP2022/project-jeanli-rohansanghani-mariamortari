@@ -67,7 +67,6 @@ public class HospitalManagementSystem {
 			System.out.println("Unable to remove patient since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
 			System.out.println("");
 			System.out.println("");
-			menuControls();
 		}else {
 			Scanner in = new Scanner(System.in);
 			System.out.println("List of patients currently in the system:");
@@ -94,7 +93,6 @@ public class HospitalManagementSystem {
 			System.out.println("Unable to assess patient since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
 			System.out.println("");
 			System.out.println("");
-			menuControls();
 		}else {
 			Scanner in = new Scanner(System.in);
 			System.out.println("Please type the ID number of the patient you wish to assess the BMI of from the system");
@@ -103,15 +101,14 @@ public class HospitalManagementSystem {
 			printPatientList();
 			System.out.println("");
 			System.out.println("");
-			int id_patientToAssess = in.nextInt();
+			String id_patientToAssess = Integer.toString(in.nextInt());
 			printBMI(id_patientToAssess);
-		menuControls();
 		}
 	}
 	
-	public void printBMI(int ID) {
+	public void printBMI(String id) {
 		for (Patient val: patientList) {
-			if(val.getPatientId() == ID) {
+			if(val.getPatientId().equals(id)) {
 				double BMI = val.calculateBMI();
 				System.out.println("This patient has a BMI of " + BMI);
 				System.out.println(assessWeightClass(BMI));
