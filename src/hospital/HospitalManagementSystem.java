@@ -32,6 +32,7 @@ public class HospitalManagementSystem {
 		Scanner in = new Scanner(System.in);
 		System.out.println("-------------------------------------------------------");
 		System.out.println("Hospital Management System");
+		System.out.println("Select L to List current Patients in the System");
 		System.out.println("Select A to Add Patient to the System");
 		System.out.println("Select W to Assess the BMI of a Patient");
 		System.out.println("Select D to Delete Patient from the System");
@@ -39,7 +40,10 @@ public class HospitalManagementSystem {
 
 		
 		String input = in.nextLine();
-		if(input.equals("A")) {
+		if(input.equals("L")) {
+			printPatientList();
+		}
+		else if(input.equals("A")) {
 			addPatient(generatePatient());
 		}
 		else if(input.equals("W")) {
@@ -59,9 +63,6 @@ public class HospitalManagementSystem {
 	
 	public void addPatient(Patient newPatient) {
 		patientList.add(newPatient);
-		System.out.println("");
-		System.out.println("");
-		System.out.println("List of Patients in the System: ");
 		printPatientList();
 		
 	}
@@ -73,7 +74,6 @@ public class HospitalManagementSystem {
 			return null;
 		}else {
 			Scanner in = new Scanner(System.in);
-			System.out.println("List of patients currently in the system:");
 			printPatientList();
 			System.out.println("");
 			System.out.println("Please type the ID number of the patient you wish to remove from the system");
@@ -90,8 +90,11 @@ public class HospitalManagementSystem {
 				changed =true;
 			}
 		}if(changed) {
-		patientList.remove(indexDelete);
-		System.out.println("Patient has been deleted from the system");
+			String removedPatientName = patientList.get(indexDelete).getFirstName() + " " + patientList.get(indexDelete).getLastName();
+			patientList.remove(indexDelete);
+			System.out.println("Patient " + removedPatientName + " has been deleted from the system");
+			System.out.println("");
+			System.out.println("");
 		}
 	}
 	
@@ -103,8 +106,6 @@ public class HospitalManagementSystem {
 		}else {
 			Scanner in = new Scanner(System.in);
 			System.out.println("Please type the ID number of the patient you wish to assess the BMI of from the system");
-			System.out.println("");
-			System.out.println("");
 			printPatientList();
 			System.out.println("");
 			System.out.println("");
@@ -138,15 +139,24 @@ public class HospitalManagementSystem {
 	}
 	
 	public void printPatientList() {
-		int counter = 1;
-		for(Patient patient: patientList) {
-			if(patient!=null) {
-				System.out.println(counter + ". ");
-				System.out.println(patient.toString());
-				counter += 1;
-				System.out.println("");
-				System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("List of Patients in the System: ");
+		if(patientList.size() > 0) {
+			int counter = 1;
+			for(Patient patient: patientList) {
+				if(patient!=null) {
+					System.out.println(counter + ". ");
+					System.out.println(patient.toString());
+					counter += 1;
+					System.out.println("");
+					System.out.println("");
+				}
 			}
+		} else {
+			System.out.println("There are no patients in the system.");
+			System.out.println("");
+			System.out.println("");
 		}
 	}
 	
