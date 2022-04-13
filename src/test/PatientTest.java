@@ -64,5 +64,17 @@ class PatientTest {
 		double patientBMI = p1.calculateBMI();
 		assertEquals(31.25,patientBMI,0.05);
 	}
-
+	
+	@Test
+	void testToString() {
+		String patientInfo = p1.toString();
+		String expected = "Patient's Name = bob jones" + "\n" + 
+				"Patient's Age = 36" + "\n" +
+				"Patient's Sex = male" + "\n" +
+				"Patient's Weight = 80.0" + "\n" +
+				"Patient's Height = 1.6" + "\n" +
+				"Patient's ID = 1345";
+		
+		assertEquals(patientInfo, expected);
+	}
 }
