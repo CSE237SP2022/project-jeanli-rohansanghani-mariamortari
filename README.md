@@ -16,11 +16,11 @@ By: Jean Li, Maria Mortari, Rohan Sanghani
 
 * For the final iteration, we intend on creating new user stories to the Hospital Management System such as but not limited to
 
-	* Implementing the appointment class
+	* Implementing the appointment class so the user can make appointments for patients in the system
 	
 	* Search for a patient in the system
 	
-	* Store and check patient's lab results
+	* Store and check a patient's lab results
 	
 
 ### Is there anything that you implemented but doesn't currently work?
@@ -33,7 +33,7 @@ By: Jean Li, Maria Mortari, Rohan Sanghani
 
 ### What commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
 
-* Pull the repository into your local machine using <code> git pull </code>
+* Clone the repository into your local machine using <code> git clone url </code>
 
 * Cd into the repository and run <code> ./runHospitalManagementSystem.sh </code>
 
