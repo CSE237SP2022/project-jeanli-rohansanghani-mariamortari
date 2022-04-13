@@ -52,4 +52,14 @@ public class Patient {
 		double bmi = weight/(Math.pow(height, 2));
 		return bmi;
 	}
+	
+	public String toString() {
+		return "Patient's Name = " + this.firstName + " " + this.lastName + "\n" + 
+				"Patient's Age = " + this.age + "\n" +
+				"Patient's Sex = " + this.sex + "\n" +
+				"Patient's Weight = " + this.weight + "\n" +
+				"Patient's Height = " + this.height + "\n" +
+				"Patient's ID = " + this.patientID;
+	}
+
 }

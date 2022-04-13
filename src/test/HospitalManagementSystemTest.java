@@ -14,14 +14,76 @@ import hospital.Patient;
 class HospitalManagementSystemTest {
 	
 	private HospitalManagementSystem hospital;
+	private ArrayList<Patient> patientList;
 	private Scanner in;
 	
 	@BeforeEach 
 	void setup() {
-		ArrayList<Patient> patientList = new ArrayList<Patient>();
+		patientList = new ArrayList<Patient>();
 		hospital = new HospitalManagementSystem(patientList, true);
 		in = new Scanner(System.in);
 	}
+	@Test
+	void testAddPatient() {
+		int numberPatientsBefore = patientList.size();
+		Patient newPatient = new Patient("bob","jones",36,"male",80,1.6,"1345");
+		
+		hospital.addPatient(newPatient);
+		
+		int numberPatientsAfter = patientList.size();
+		
+		assertEquals(numberPatientsAfter,numberPatientsBefore+1);
+		
+	}
+	@Test
+	void testIsPatientIdUnique() {
+		Patient patient1 = new Patient("bob","jones",36,"male",80.0,1.60,"1345");
+		patientList.add(patient1);
+		
+		Patient patient2 = new Patient("josh","jones",56,"male",80.0,1.60,"1345");
+		String patient2_ID = patient2.getPatientId();
+
+		boolean isIdUnique = hospital.isPatientIdUnique(patient2_ID);
+
+		assertEquals(false,isIdUnique);
+		
+	}
+	
+	@Test
+	void testDeletePatient() {
+		Patient patient1 = new Patient("bob","jones",36,"male",80.0,1.60,"1345");
+		patientList.add(patient1);
+		
+		int sizePatientListBeforeDeletion = patientList.size();
+		hospital.deletePatient("1345");
+		
+		int sizePatientListAfterDeletion = patientList.size();
+
+		assertEquals(sizePatientListAfterDeletion,sizePatientListBeforeDeletion-1);
+
+	}
+	
+//	Arguably do not need to test because it is just a Scanner method. Testing the methods below this should be enough.
+//	@Test
+//	void testGeneratePatient() {
+//		System.out.println("*********************************************");
+//		System.out.println("*********************************************");
+//		System.out.println("TO VERIFY THIS TEST, ENTER THE FOLLOWING INFORMATION WHEN PROMPTED");
+//		System.out.println("First Name: bob");
+//		System.out.println("Last Name: jones");
+//		System.out.println("Age: 36");
+//		System.out.println("Sex: male");
+//		System.out.println("Weight: 80");
+//		System.out.println("Height: 1.6");
+//		System.out.println("*********************************************");
+//		System.out.println("");
+//		
+//		Patient patient1 = hospital.generatePatient();
+//		
+//		Patient patient2 = new Patient("bob","jones",36,"male",80,1.6,patient1.getPatientId());
+//
+//		assertEquals(patient1.toString(), patient2.toString());
+//	}
 
 	@Test
 	void testGetFirstNameFromInput() {
@@ -75,6 +137,7 @@ class HospitalManagementSystemTest {
 	void testGeneratePatientId() {
 		String patientIdCreatedBySystem = hospital.generatePatientId();
 		Patient p1 = new Patient("bob","jones",36,"male",80.0,1.60,patientIdCreatedBySystem);	
+		
 		assertEquals(patientIdCreatedBySystem, p1.getPatientId());
 	}
 	

@@ -40,33 +40,37 @@ public class HospitalManagementSystem {
 		
 		String input = in.nextLine();
 		if(input.equals("A")) {
-			addPatient();
+			addPatient(generatePatient());
 		}
-		if(input.equals("W")) {
+		else if(input.equals("W")) {
 			assessBMI();
 		}
-		if(input.equals("D")) {
-			deletePatient();
+		else if(input.equals("D")) {
+			deletePatient(getIdToDeleteFromInput());
 		}
-		if(input.equals("X")) {
+		else if(input.equals("X")) {
 			keepGoing = false;
+		}
+		else {
+			System.out.println("Invalid Input. Please try again.");
 		}
 		
 	}
 	
-	public void addPatient() {
-		patientList.add(generatePatient());
+	public void addPatient(Patient newPatient) {
+		patientList.add(newPatient);
 		System.out.println("");
 		System.out.println("");
 		System.out.println("List of Patients in the System: ");
 		printPatientList();
 		
 	}
-	public void deletePatient() {
+	public String getIdToDeleteFromInput() {
 		if(patientList.isEmpty()) {
 			System.out.println("Unable to remove patient since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
 			System.out.println("");
 			System.out.println("");
+			return null;
 		}else {
 			Scanner in = new Scanner(System.in);
 			System.out.println("List of patients currently in the system:");
@@ -74,17 +78,20 @@ public class HospitalManagementSystem {
 			System.out.println("");
 			System.out.println("Please type the ID number of the patient you wish to remove from the system");
 			String patientIdUserInput = Integer.toString(in.nextInt());
-			int indexDelete = 0;
-			boolean changed =false;
-			for(Patient patient:patientList) {
-				if(patient.getPatientId().equals(patientIdUserInput)) {
-					indexDelete = patientList.indexOf(patient);
-					changed =true;
-				}
-			}if(changed) {
-			patientList.remove(indexDelete);
-			System.out.println("Patient has been deleted from the system");
+			return patientIdUserInput;
+		}
+	}
+	public void deletePatient(String IdToDelete) {
+		int indexDelete = 0;
+		boolean changed =false;
+		for(Patient patient:patientList) {
+			if(patient.getPatientId().equals(IdToDelete)) {
+				indexDelete = patientList.indexOf(patient);
+				changed =true;
 			}
+		}if(changed) {
+		patientList.remove(indexDelete);
+		System.out.println("Patient has been deleted from the system");
 		}
 	}
 	
@@ -132,15 +139,10 @@ public class HospitalManagementSystem {
 	
 	public void printPatientList() {
 		int counter = 1;
-		for(Patient val: patientList) {
-			if(val!=null) {
+		for(Patient patient: patientList) {
+			if(patient!=null) {
 				System.out.println(counter + ". ");
-				System.out.println("Patient's Name =   " + "" + ((Patient) val).getFirstName() + " " + ((Patient) val).getLastName());
-				System.out.println("Patient's Age =   " + "" + ((Patient) val).getAge());
-				System.out.println("Patient's Sex =   " + "" + ((Patient) val).getSex());
-				System.out.println("Patient's Weight (in kilograms) =   " + "" + ((Patient) val).getWeight());
-				System.out.println("Patient's Height (in meters) =   " + "" + ((Patient) val).getHeight());
-				System.out.println("Patient's ID =   " + "" + ((Patient) val).getPatientId());
+				System.out.println(patient.toString());
 				counter += 1;
 				System.out.println("");
 				System.out.println("");
@@ -152,19 +154,12 @@ public class HospitalManagementSystem {
 		Scanner in = new Scanner(System.in);
 		
 		String patientFirstName = getFirstNameFromInput(in);
-		
 		String patientLastName = getLastNameFromInput(in);
-		
 		int patientAge = getAgeFromInput(in);
-		
 		String patientSex = getSexFromInput(in);
-		
 		double patientWeight = getWeightFromInput(in);
-		
 		double patientHeight = getHeightFromInput(in);
-		
 		String patientID = generatePatientId();
-		
 		Patient patient = new Patient(patientFirstName,patientLastName,patientAge,patientSex,patientWeight,patientHeight,patientID);
 		
 		return patient;
@@ -233,17 +228,8 @@ public class HospitalManagementSystem {
 		}
 		return patientHeight;
 	}
-	public boolean isPatientIdUnique(String patientIdToCheckFor) {
-		for(Patient patient:patientList) {
-			if(patient.getPatientId().equals(patientIdToCheckFor)) {
-				return false;
-			}
-		}
-		return true;
-	}
 	
 	public String generatePatientId() {
-		boolean unique=true;
 		String patient_Id="";
 		for(int i=0;i<4;i++) {
 			int randomNumber = (int)((Math.random() * 9) + 1);
@@ -253,6 +239,14 @@ public class HospitalManagementSystem {
 			generatePatientId();
 		}
 		return patient_Id;
+	}
+	public boolean isPatientIdUnique(String patientIdToCheckFor) {
+		for(Patient patient:patientList) {
+			if(patient.getPatientId().equals(patientIdToCheckFor)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	
