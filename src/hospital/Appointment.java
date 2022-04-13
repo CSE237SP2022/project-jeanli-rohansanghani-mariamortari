@@ -12,7 +12,7 @@ public class Appointment {
 		this.date = date;
 		this.time = time;
 		this.type = type;
-		this.insurance = insurance;
+		this.setInsurance(insurance);
 		this.patient = patient;
 	}
 	
@@ -34,6 +34,10 @@ public class Appointment {
 	
 	public Patient getPatient(){
 		return patient;
+	}
+
+	public void setInsurance(String insurance) {
+		this.insurance = insurance;
 	}
 
 }
