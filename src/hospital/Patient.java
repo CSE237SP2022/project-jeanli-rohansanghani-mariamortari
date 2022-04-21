@@ -9,6 +9,8 @@ public class Patient {
 	private double weight; //in kilograms
 	private double height; //in meters
 	private String patientID;
+	private double underweightThreshold = 18.4;
+	private double overweightThreshold = 25.0;
 	
 	public Patient(String firstName, String lastName, int age, String sex, double weight, double height,String patientID) {
 		this.firstName = firstName;
@@ -60,6 +62,19 @@ public class Patient {
 				"Patient's Weight = " + this.weight + "\n" +
 				"Patient's Height = " + this.height + "\n" +
 				"Patient's ID = " + this.patientID;
+	}
+	
+	public void assessWeightClass() {
+		double BMI = this.calculateBMI();
+		String weightClass = "Something went wrong.";
+		if(BMI < underweightThreshold) {
+			weightClass = "This patient is underweight.";
+		} else if (BMI >= overweightThreshold) {
+			weightClass = "This patient is overweight.";
+		} else {
+			weightClass = "This patient is neither underweight nor overweight.";
+		}
+		System.out.println(weightClass);
 	}
 
 }

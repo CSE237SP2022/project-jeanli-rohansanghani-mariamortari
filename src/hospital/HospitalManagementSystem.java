@@ -47,10 +47,10 @@ public class HospitalManagementSystem {
 			addPatient(generatePatient());
 		}
 		else if(input.equals("W")) {
-			assessBMI();
+			getPatientFromId(getIdFromInput()).assessWeightClass();
 		}
 		else if(input.equals("D")) {
-			deletePatient(getIdToDeleteFromInput());
+			deletePatient(getIdFromInput());
 		}
 		else if(input.equals("X")) {
 			keepGoing = false;
@@ -66,9 +66,9 @@ public class HospitalManagementSystem {
 		printPatientList();
 		
 	}
-	public String getIdToDeleteFromInput() {
+	public String getIdFromInput() {
 		if(patientList.isEmpty()) {
-			System.out.println("Unable to remove patient since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
+			System.out.println("Unable to conduct this action since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
 			System.out.println("");
 			System.out.println("");
 			return null;
@@ -76,7 +76,7 @@ public class HospitalManagementSystem {
 			Scanner in = new Scanner(System.in);
 			printPatientList();
 			System.out.println("");
-			System.out.println("Please type the ID number of the patient you wish to remove from the system");
+			System.out.println("Please type the ID number of the patient you wish to conduct this action on from the system");
 			String patientIdUserInput = Integer.toString(in.nextInt());
 			return patientIdUserInput;
 		}
@@ -98,32 +98,20 @@ public class HospitalManagementSystem {
 		}
 	}
 	
-	public void assessBMI() {
-		if(patientList.isEmpty()) {
-			System.out.println("Unable to assess patient since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
-			System.out.println("");
-			System.out.println("");
-		}else {
-			Scanner in = new Scanner(System.in);
-			System.out.println("Please type the ID number of the patient you wish to assess the BMI of from the system");
-			printPatientList();
-			System.out.println("");
-			System.out.println("");
-			String id_patientToAssess = Integer.toString(in.nextInt());
-			printBMI(id_patientToAssess);
-		}
-	}
 	
-	public void printBMI(String id) {
+	public Patient getPatientFromId(String id) throws NullPointerException {
+		Patient patient = null;
 		for (Patient val: patientList) {
 			if(val.getPatientId().equals(id)) {
-				double BMI = val.calculateBMI();
-				System.out.println("This patient has a BMI of " + BMI);
-				System.out.println(assessWeightClass(BMI));
-				System.out.println("");
-				System.out.println("");
+				patient = val;
+//				double BMI = val.calculateBMI();
+//				System.out.println("This patient has a BMI of " + BMI);
+//				System.out.println(assessWeightClass(BMI));
+//				System.out.println("");
+//				System.out.println("");
 			}
 		}
+		return patient;
 	}
 	
 	public String assessWeightClass(double BMI) {
