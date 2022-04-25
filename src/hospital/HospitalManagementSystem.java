@@ -45,13 +45,8 @@ public class HospitalManagementSystem {
 			printPatientList();
 		}
 		else if(input.equals("A")) {
-			PatientGenerator generator = new PatientGenerator();
-			Patient patient = generator.generatePatient();
-			if(isPatientIdUnique(patient.getPatientId()) == false) {
-				patient.setPatientId(patient.generatePatientId());
-			} else {
-				addPatient(patient);
-			}
+			Patient newPatient = generatePatient();
+			addPatient(newPatient);
 		}
 		else if(input.equals("S")) {
 			searchPatient();
@@ -77,6 +72,23 @@ public class HospitalManagementSystem {
 			System.out.println("Invalid Input. Please try again.");
 		}
 		
+	}
+	
+	public Patient generatePatient() {
+		System.out.println("Enter Patient's First Name");
+		String patientFirstName = in.next();
+		System.out.println("Enter Patient's Last Name");
+		String patientLastName = in.next();
+		System.out.println("Enter Patient's Age");
+		while (!in.hasNextInt()) { System.out.println("Enter integer values only");in.next();} int patientAge = in.nextInt();
+		System.out.println("Enter Patient's Sex");
+		String patientSex = in.next();
+		System.out.println("Enter Patient's Weight (in kilograms)");
+		while (!in.hasNextDouble()) { System.out.println("Value not accepted. Please enter a number");in.next();} double patientWeight = in.nextDouble();
+		System.out.println("Enter Patient's Height (in meters)");
+		while (!in.hasNextDouble()) { System.out.println("Value not accepted. Please enter a number");in.next();} double patientHeight = in.nextDouble();
+		Patient patient = new Patient(patientFirstName,patientLastName,patientAge,patientSex,patientWeight,patientHeight);
+		return patient;	
 	}
 	
 	public String getIdFromInput() {
