@@ -12,14 +12,14 @@ public class Patient {
 	private double underweightThreshold = 18.4;
 	private double overweightThreshold = 25.0;
 	
-	public Patient(String firstName, String lastName, int age, String sex, double weight, double height,String patientID) {
+	public Patient(String firstName, String lastName, int age, String sex, double weight, double height) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 		this.sex = sex;
 		this.weight = weight;
 		this.height = height;
-		this.patientID = patientID;
+		this.patientID = generatePatientId();
 	}
 	
 	public String getFirstName() {
@@ -76,6 +76,19 @@ public class Patient {
 		}
 //		System.out.println(weightClass);
 		return weightClass;
+	}
+	
+	public String generatePatientId() {
+		String patient_Id="";
+		for(int i=0;i<4;i++) {
+			int randomNumber = (int)((Math.random() * 9) + 1);
+			patient_Id=patient_Id+Integer.toString(randomNumber);
+		}
+		return patient_Id;
+	}
+	
+	public void setPatientId(String ID) {
+		this.patientID = ID;
 	}
 
 }
