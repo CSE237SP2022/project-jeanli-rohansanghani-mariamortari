@@ -7,10 +7,12 @@ public class HospitalManagementSystem {
 	
 	private ArrayList<Patient> patientList;
 	private boolean keepGoing;
+	private Scanner in;
 	
 	public HospitalManagementSystem(ArrayList<Patient> patientList, boolean keepGoing) {
 		this.patientList = patientList;
 		this.keepGoing = keepGoing;
+		this.in = new Scanner(System.in);
 	}
 
 	public static void main(String[] args) {
@@ -27,7 +29,6 @@ public class HospitalManagementSystem {
 	}
 	
 	public void menuControls() {
-		Scanner in = new Scanner(System.in);
 		System.out.println("-------------------------------------------------------");
 		System.out.println("Hospital Management System");
 		System.out.println("Select L to List current Patients in the System");
@@ -84,7 +85,6 @@ public class HospitalManagementSystem {
 			System.out.println("");
 			return null;
 		}else {
-			Scanner in = new Scanner(System.in);
 			printPatientList();
 			System.out.println("");
 			System.out.println("Please type the ID number of the patient you wish to conduct this action on from the system");
@@ -147,33 +147,30 @@ public class HospitalManagementSystem {
 		}
 	}
 	
-	public Patient generatePatient() {
-		Scanner in = new Scanner(System.in);
-		
-		String patientFirstName = getFirstNameFromInput(in);
-		String patientLastName = getLastNameFromInput(in);
-		int patientAge = getAgeFromInput(in);
-		String patientSex = getSexFromInput(in);
-		double patientWeight = getWeightFromInput(in);
-		double patientHeight = getHeightFromInput(in);
-//		String patientID = generatePatientId();
+	public Patient generatePatient() {		
+		String patientFirstName = getFirstNameFromInput();
+		String patientLastName = getLastNameFromInput();
+		int patientAge = getAgeFromInput();
+		String patientSex = getSexFromInput();
+		double patientWeight = getWeightFromInput();
+		double patientHeight = getHeightFromInput();
 		Patient patient = new Patient(patientFirstName,patientLastName,patientAge,patientSex,patientWeight,patientHeight);
 		
 		return patient;
 		
 	}
 	
-	public String getFirstNameFromInput(Scanner in) {
+	public String getFirstNameFromInput() {
 		System.out.println("Enter Patient's First Name");
 		return in.next();
 	}
 	
-	public String getLastNameFromInput(Scanner in) {
+	public String getLastNameFromInput() {
 		System.out.println("Enter Patient's Last Name");
 		return in.next();
 	}
 	
-	public int getAgeFromInput(Scanner in) {
+	public int getAgeFromInput() {
 		boolean inputAnInt = false;
 		int patientAge = 0;
 		while(!inputAnInt) {
@@ -189,12 +186,12 @@ public class HospitalManagementSystem {
 		return patientAge;
 	}
 	
-	public String getSexFromInput(Scanner in) {
+	public String getSexFromInput() {
 		System.out.println("Enter Patient's Sex");
 		return in.next();
 	}
 	
-	public double getWeightFromInput(Scanner in) {
+	public double getWeightFromInput() {
 		boolean inputANumber = false;
 		double patientWeight = 0;
 		while(!inputANumber) {
@@ -210,7 +207,7 @@ public class HospitalManagementSystem {
 		return patientWeight;
 	}
 	
-	public double getHeightFromInput(Scanner in) {
+	public double getHeightFromInput() {
 		boolean inputANumber = false;
 		double patientHeight = 0;
 		while(!inputANumber) {
@@ -235,7 +232,6 @@ public class HospitalManagementSystem {
 		return true;
 	}
 	public void enterLabTests() {
-		Scanner in = new Scanner(System.in);
 		System.out.println("Please type the ID number of the patient you wish to add lab test results for");
 		String patientIdUserInput = Integer.toString(in.nextInt());
 		for (Patient patient: patientList) {
@@ -255,14 +251,13 @@ public class HospitalManagementSystem {
 	}
 	
 	public void searchPatient() {
-		Scanner in = new Scanner(System.in);
 		boolean found = false;
 		System.out.println("Type the first name of the patient you wish to search for in the system");
 		String searchPatientName = in.next();
 		for( Patient patient:patientList) {
 			if(patient.getFirstName().equals(searchPatientName)) {
 				found=true;
-				patient.printPatient();
+				patient.toString();
 			}
 		}
 		if(found == false) {
