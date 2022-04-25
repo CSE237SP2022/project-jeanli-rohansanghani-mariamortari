@@ -61,5 +61,16 @@ public class Patient {
 				"Patient's Height = " + this.height + "\n" +
 				"Patient's ID = " + this.patientID;
 	}
+	public void printPatient() {
+		System.out.println(firstName);
+		System.out.println(lastName);
+		System.out.println(age);
+		System.out.println(sex);
+		System.out.println(weight);
+		System.out.println(height);
+		System.out.println(patientID);
+		System.out.println("");
+		
+	}
 
 }
