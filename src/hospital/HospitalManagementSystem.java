@@ -47,7 +47,12 @@ public class HospitalManagementSystem {
 			addPatient(generatePatient());
 		}
 		else if(input.equals("W")) {
-			getPatientFromId(getIdFromInput()).assessWeightClass();
+			Patient patient = getPatientFromId(getIdFromInput());
+			if(patient != null) {
+				System.out.println(patient.assessWeightClass());
+			} else {
+				System.out.println("Something went wrong. Make sure you entered a valid ID.");
+			}
 		}
 		else if(input.equals("D")) {
 			deletePatient(getIdFromInput());
@@ -61,11 +66,6 @@ public class HospitalManagementSystem {
 		
 	}
 	
-	public void addPatient(Patient newPatient) {
-		patientList.add(newPatient);
-		printPatientList();
-		
-	}
 	public String getIdFromInput() {
 		if(patientList.isEmpty()) {
 			System.out.println("Unable to conduct this action since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
@@ -81,6 +81,22 @@ public class HospitalManagementSystem {
 			return patientIdUserInput;
 		}
 	}
+	public Patient getPatientFromId(String id) {
+		Patient patient = null;
+		for (Patient val: patientList) {
+			if(val.getPatientId().equals(id)) {
+				patient = val;
+			}
+		}
+		return patient;
+	}
+	
+	public void addPatient(Patient newPatient) {
+		patientList.add(newPatient);
+		printPatientList();
+		
+	}
+	
 	public void deletePatient(String IdToDelete) {
 		int indexDelete = 0;
 		boolean changed =false;
@@ -96,34 +112,6 @@ public class HospitalManagementSystem {
 			System.out.println("");
 			System.out.println("");
 		}
-	}
-	
-	
-	public Patient getPatientFromId(String id) throws NullPointerException {
-		Patient patient = null;
-		for (Patient val: patientList) {
-			if(val.getPatientId().equals(id)) {
-				patient = val;
-//				double BMI = val.calculateBMI();
-//				System.out.println("This patient has a BMI of " + BMI);
-//				System.out.println(assessWeightClass(BMI));
-//				System.out.println("");
-//				System.out.println("");
-			}
-		}
-		return patient;
-	}
-	
-	public String assessWeightClass(double BMI) {
-		String weightClass = "Something went wrong.";
-		if(BMI < underweightThreshold) {
-			weightClass = "This patient is underweight.";
-		} else if (BMI >= overweightThreshold) {
-			weightClass = "This patient is overweight.";
-		} else {
-			weightClass = "This patient is neither underweight nor overweight.";
-		}
-		return weightClass;
 	}
 	
 	public void printPatientList() {

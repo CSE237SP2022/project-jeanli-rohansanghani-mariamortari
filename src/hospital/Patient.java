@@ -64,7 +64,7 @@ public class Patient {
 				"Patient's ID = " + this.patientID;
 	}
 	
-	public void assessWeightClass() {
+	public String assessWeightClass() {
 		double BMI = this.calculateBMI();
 		String weightClass = "Something went wrong.";
 		if(BMI < underweightThreshold) {
@@ -74,7 +74,8 @@ public class Patient {
 		} else {
 			weightClass = "This patient is neither underweight nor overweight.";
 		}
-		System.out.println(weightClass);
+//		System.out.println(weightClass);
+		return weightClass;
 	}
 
 }

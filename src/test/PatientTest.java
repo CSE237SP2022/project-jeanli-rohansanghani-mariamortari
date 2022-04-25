@@ -77,4 +77,28 @@ class PatientTest {
 		
 		assertEquals(patientInfo, expected);
 	}
+	
+	@Test
+	void testAssessWeightClassUnderweight() {
+		p1 = new Patient("bob","jones",36,"male",10.0,1.60,"1345");
+		String weightClass = p1.assessWeightClass();
+		
+		assertTrue(weightClass.equals("This patient is underweight."));
+	}
+	
+	@Test
+	void testAssessWeightClassOverweight() {
+		p1 = new Patient("bob","jones",36,"male",160.0,1.60,"1345");
+		String weightClass = p1.assessWeightClass();
+		
+		assertTrue(weightClass.equals("This patient is overweight."));
+	}
+	
+	@Test
+	void testAssessWeightClass() {
+		p1 = new Patient("bob","jones",36,"male",60.0,1.60,"1345");
+		String weightClass = p1.assessWeightClass();
+		
+		assertTrue(weightClass.equals("This patient is neither underweight nor overweight."));
+	}
 }

@@ -140,26 +140,5 @@ class HospitalManagementSystemTest {
 		
 		assertEquals(patientIdCreatedBySystem, p1.getPatientId());
 	}
-	
-	@Test
-	void testAssessWeightClassUnderweight() {
-		String weightClass = hospital.assessWeightClass(10.0);
-		
-		assertTrue(weightClass.equals("This patient is underweight."));
-	}
-	
-	@Test
-	void testAssessWeightClassOverweight() {
-		String weightClass = hospital.assessWeightClass(30.0);
-		
-		assertTrue(weightClass.equals("This patient is overweight."));
-	}
-	
-	@Test
-	void testAssessWeightClass() {
-		String weightClass = hospital.assessWeightClass(20.0);
-		
-		assertTrue(weightClass.equals("This patient is neither underweight nor overweight."));
-	}
 
 }
