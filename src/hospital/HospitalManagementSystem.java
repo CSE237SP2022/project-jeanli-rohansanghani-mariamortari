@@ -45,7 +45,8 @@ public class HospitalManagementSystem {
 			printPatientList();
 		}
 		else if(input.equals("A")) {
-			Patient patient = generatePatient();
+			PatientGenerator generator = new PatientGenerator();
+			Patient patient = generator.generatePatient();
 			if(isPatientIdUnique(patient.getPatientId()) == false) {
 				patient.setPatientId(patient.generatePatientId());
 			} else {
@@ -145,82 +146,6 @@ public class HospitalManagementSystem {
 			System.out.println("");
 			System.out.println("");
 		}
-	}
-	
-	public Patient generatePatient() {		
-		String patientFirstName = getFirstNameFromInput();
-		String patientLastName = getLastNameFromInput();
-		int patientAge = getAgeFromInput();
-		String patientSex = getSexFromInput();
-		double patientWeight = getWeightFromInput();
-		double patientHeight = getHeightFromInput();
-		Patient patient = new Patient(patientFirstName,patientLastName,patientAge,patientSex,patientWeight,patientHeight);
-		
-		return patient;
-		
-	}
-	
-	public String getFirstNameFromInput() {
-		System.out.println("Enter Patient's First Name");
-		return in.next();
-	}
-	
-	public String getLastNameFromInput() {
-		System.out.println("Enter Patient's Last Name");
-		return in.next();
-	}
-	
-	public int getAgeFromInput() {
-		boolean inputAnInt = false;
-		int patientAge = 0;
-		while(!inputAnInt) {
-			System.out.println("Enter Patient's Age");
-			if(in.hasNextInt()) {
-				patientAge = in.nextInt();
-				inputAnInt = true;
-			} else {
-				String response = in.next();
-				System.out.println(response + " is not an integer");
-			}
-		}
-		return patientAge;
-	}
-	
-	public String getSexFromInput() {
-		System.out.println("Enter Patient's Sex");
-		return in.next();
-	}
-	
-	public double getWeightFromInput() {
-		boolean inputANumber = false;
-		double patientWeight = 0;
-		while(!inputANumber) {
-			System.out.println("Enter Patient's Weight (in kilograms)");
-			if(in.hasNextDouble()) {
-				patientWeight = in.nextDouble();
-				inputANumber = true;
-			} else {
-				String response = in.next();
-				System.out.println(response + " is not a number");
-			}
-		}
-		return patientWeight;
-	}
-	
-	public double getHeightFromInput() {
-		boolean inputANumber = false;
-		double patientHeight = 0;
-		while(!inputANumber) {
-			System.out.println("Enter Patient's Height (in meters)");
-			if(in.hasNextDouble()) {
-				patientHeight = in.nextDouble();
-				inputANumber = true;
-			} else {
-				String response = in.next();
-				System.out.println(response + " is not a number");
-			}
-		}
-		return patientHeight;
 	}
 	
 	public boolean isPatientIdUnique(String patientIdToCheckFor) {

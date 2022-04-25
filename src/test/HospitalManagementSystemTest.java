@@ -85,53 +85,53 @@ class HospitalManagementSystemTest {
 //		assertEquals(patient1.toString(), patient2.toString());
 //	}
 
-	@Test
-	void testGetFirstNameFromInput() {
-		System.out.println("Enter Bob");
-		String firstName = hospital.getFirstNameFromInput();
-		
-		assertTrue(firstName.equals("Bob"));
-	}
-	
-	@Test
-	void testGetLastNameFromInput() {
-		System.out.println("Enter Jones");
-		String lastName = hospital.getLastNameFromInput();
-		
-		assertTrue(lastName.equals("Jones"));
-	}
-	
-	@Test
-	void testGetAgeFromInput() {
-		System.out.println("Enter 30");
-		int age = hospital.getAgeFromInput();
-		
-		assertEquals(30, age);
-	}
-	
-	@Test
-	void testGetSexFromInput() {
-		System.out.println("Enter Male");
-		String sex = hospital.getSexFromInput();
-		
-		assertTrue(sex.equals("Male"));
-	}
-	
-	@Test
-	void testGetWeightFromInput() {
-		System.out.println("Enter 80");
-		double weight = hospital.getWeightFromInput();
-		
-		assertEquals(80, weight, 0.05);
-	}
-	
-	@Test
-	void testGetHeightFromINput() {
-		System.out.println("Enter 1.6");
-		double height = hospital.getHeightFromInput();
-		
-		assertEquals(1.6, height, 0.05);
-	}
+//	@Test
+//	void testGetFirstNameFromInput() {
+//		System.out.println("Enter Bob");
+//		String firstName = hospital.getFirstNameFromInput();
+//		
+//		assertTrue(firstName.equals("Bob"));
+//	}
+//	
+//	@Test
+//	void testGetLastNameFromInput() {
+//		System.out.println("Enter Jones");
+//		String lastName = hospital.getLastNameFromInput();
+//		
+//		assertTrue(lastName.equals("Jones"));
+//	}
+//	
+//	@Test
+//	void testGetAgeFromInput() {
+//		System.out.println("Enter 30");
+//		int age = hospital.getAgeFromInput();
+//		
+//		assertEquals(30, age);
+//	}
+//	
+//	@Test
+//	void testGetSexFromInput() {
+//		System.out.println("Enter Male");
+//		String sex = hospital.getSexFromInput();
+//		
+//		assertTrue(sex.equals("Male"));
+//	}
+//	
+//	@Test
+//	void testGetWeightFromInput() {
+//		System.out.println("Enter 80");
+//		double weight = hospital.getWeightFromInput();
+//		
+//		assertEquals(80, weight, 0.05);
+//	}
+//	
+//	@Test
+//	void testGetHeightFromINput() {
+//		System.out.println("Enter 1.6");
+//		double height = hospital.getHeightFromInput();
+//		
+//		assertEquals(1.6, height, 0.05);
+//	}
 	
 //	@Test
 //	void testGeneratePatientId() {
