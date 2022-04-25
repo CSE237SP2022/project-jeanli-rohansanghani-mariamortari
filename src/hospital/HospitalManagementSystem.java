@@ -34,6 +34,7 @@ public class HospitalManagementSystem {
 		System.out.println("Hospital Management System");
 		System.out.println("Select L to List current Patients in the System");
 		System.out.println("Select A to Add Patient to the System");
+		System.out.println("Select S to Search for a Patient in the System");
 		System.out.println("Select T to Add Lab Test Results for a Patient");
 		System.out.println("Select W to Assess the BMI of a Patient");
 		System.out.println("Select D to Delete Patient from the System");
@@ -47,6 +48,9 @@ public class HospitalManagementSystem {
 		else if(input.equals("A")) {
 			addPatient(generatePatient());
 		}
+		else if(input.equals("S")) {
+			searchPatient();
+    }
 		else if(input.equals("T")) {
 			enterLabTests();
 		}
@@ -280,6 +284,24 @@ public class HospitalManagementSystem {
 				patient.printLabResults(patient);
 			}
 		}
+	}
+	
+	public void searchPatient() {
+		Scanner in = new Scanner(System.in);
+		boolean found = false;
+		System.out.println("Type the first name of the patient you wish to search for in the system");
+		String searchPatientName = in.next();
+		for( Patient patient:patientList) {
+			if(patient.getFirstName().equals(searchPatientName)) {
+				found=true;
+				patient.printPatient();
+			}
+		}
+		if(found == false) {
+			System.out.println("There are no patients in the system with this name");
+		}
+		
+		
 	}
 	
 	
