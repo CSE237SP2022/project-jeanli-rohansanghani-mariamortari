@@ -227,16 +227,4 @@ public class HospitalManagementSystem {
 		return true;
 	}
 	
-//	public String generatePatientId() {
-//		String patient_Id="";
-//		for(int i=0;i<4;i++) {
-//			int randomNumber = (int)((Math.random() * 9) + 1);
-//			patient_Id=patient_Id+Integer.toString(randomNumber);
-//		}
-//		if(isPatientIdUnique(patient_Id)==false) {
-//			generatePatientId();
-//		}
-//		return patient_Id;
-//	}
-	
 }
