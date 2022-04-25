@@ -7,8 +7,6 @@ public class HospitalManagementSystem {
 	
 	private ArrayList<Patient> patientList;
 	private boolean keepGoing;
-	private double underweightThreshold = 18.4;
-	private double overweightThreshold = 25.0;
 	
 	public HospitalManagementSystem(ArrayList<Patient> patientList, boolean keepGoing) {
 		this.patientList = patientList;
@@ -46,7 +44,12 @@ public class HospitalManagementSystem {
 			printPatientList();
 		}
 		else if(input.equals("A")) {
-			addPatient(generatePatient());
+			Patient patient = generatePatient();
+			if(isPatientIdUnique(patient.getPatientId()) == false) {
+				patient.setPatientId(patient.generatePatientId());
+			} else {
+				addPatient(patient);
+			}
 		}
 		else if(input.equals("S")) {
 			searchPatient();
@@ -55,10 +58,15 @@ public class HospitalManagementSystem {
 			enterLabTests();
 		}
 		else if(input.equals("W")) {
-			assessBMI();
+			Patient patient = getPatientFromId(getIdFromInput());
+			if(patient != null) {
+				System.out.println(patient.assessWeightClass());
+			} else {
+				System.out.println("Something went wrong. Make sure you entered a valid ID.");
+			}
 		}
 		else if(input.equals("D")) {
-			deletePatient(getIdToDeleteFromInput());
+			deletePatient(getIdFromInput());
 		}
 		else if(input.equals("X")) {
 			keepGoing = false;
@@ -69,14 +77,9 @@ public class HospitalManagementSystem {
 		
 	}
 	
-	public void addPatient(Patient newPatient) {
-		patientList.add(newPatient);
-		printPatientList();
-		
-	}
-	public String getIdToDeleteFromInput() {
+	public String getIdFromInput() {
 		if(patientList.isEmpty()) {
-			System.out.println("Unable to remove patient since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
+			System.out.println("Unable to conduct this action since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
 			System.out.println("");
 			System.out.println("");
 			return null;
@@ -84,11 +87,27 @@ public class HospitalManagementSystem {
 			Scanner in = new Scanner(System.in);
 			printPatientList();
 			System.out.println("");
-			System.out.println("Please type the ID number of the patient you wish to remove from the system");
+			System.out.println("Please type the ID number of the patient you wish to conduct this action on from the system");
 			String patientIdUserInput = Integer.toString(in.nextInt());
 			return patientIdUserInput;
 		}
 	}
+	public Patient getPatientFromId(String id) {
+		Patient patient = null;
+		for (Patient val: patientList) {
+			if(val.getPatientId().equals(id)) {
+				patient = val;
+			}
+		}
+		return patient;
+	}
+	
+	public void addPatient(Patient newPatient) {
+		patientList.add(newPatient);
+		printPatientList();
+		
+	}
+	
 	public void deletePatient(String IdToDelete) {
 		int indexDelete = 0;
 		boolean changed =false;
@@ -104,46 +123,6 @@ public class HospitalManagementSystem {
 			System.out.println("");
 			System.out.println("");
 		}
-	}
-	
-	public void assessBMI() {
-		if(patientList.isEmpty()) {
-			System.out.println("Unable to assess patient since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
-			System.out.println("");
-			System.out.println("");
-		}else {
-			Scanner in = new Scanner(System.in);
-			System.out.println("Please type the ID number of the patient you wish to assess the BMI of from the system");
-			printPatientList();
-			System.out.println("");
-			System.out.println("");
-			String id_patientToAssess = Integer.toString(in.nextInt());
-			printBMI(id_patientToAssess);
-		}
-	}
-	
-	public void printBMI(String id) {
-		for (Patient val: patientList) {
-			if(val.getPatientId().equals(id)) {
-				double BMI = val.calculateBMI();
-				System.out.println("This patient has a BMI of " + BMI);
-				System.out.println(assessWeightClass(BMI));
-				System.out.println("");
-				System.out.println("");
-			}
-		}
-	}
-	
-	public String assessWeightClass(double BMI) {
-		String weightClass = "Something went wrong.";
-		if(BMI < underweightThreshold) {
-			weightClass = "This patient is underweight.";
-		} else if (BMI >= overweightThreshold) {
-			weightClass = "This patient is overweight.";
-		} else {
-			weightClass = "This patient is neither underweight nor overweight.";
-		}
-		return weightClass;
 	}
 	
 	public void printPatientList() {
@@ -177,8 +156,8 @@ public class HospitalManagementSystem {
 		String patientSex = getSexFromInput(in);
 		double patientWeight = getWeightFromInput(in);
 		double patientHeight = getHeightFromInput(in);
-		String patientID = generatePatientId();
-		Patient patient = new Patient(patientFirstName,patientLastName,patientAge,patientSex,patientWeight,patientHeight,patientID);
+//		String patientID = generatePatientId();
+		Patient patient = new Patient(patientFirstName,patientLastName,patientAge,patientSex,patientWeight,patientHeight);
 		
 		return patient;
 		
@@ -247,17 +226,6 @@ public class HospitalManagementSystem {
 		return patientHeight;
 	}
 	
-	public String generatePatientId() {
-		String patient_Id="";
-		for(int i=0;i<4;i++) {
-			int randomNumber = (int)((Math.random() * 9) + 1);
-			patient_Id=patient_Id+Integer.toString(randomNumber);
-		}
-		if(isPatientIdUnique(patient_Id)==false) {
-			generatePatientId();
-		}
-		return patient_Id;
-	}
 	public boolean isPatientIdUnique(String patientIdToCheckFor) {
 		for(Patient patient:patientList) {
 			if(patient.getPatientId().equals(patientIdToCheckFor)) {
@@ -303,6 +271,5 @@ public class HospitalManagementSystem {
 		
 		
 	}
-	
 	
 }

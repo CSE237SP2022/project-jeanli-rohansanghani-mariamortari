@@ -15,7 +15,7 @@ class AppointmentTest {
 	
 	@BeforeEach
 	void setup() {
-		patient1 = new Patient("bob","jones",36,"male",80.0,1.60,"1345");
+		patient1 = new Patient("bob","jones",36,"male",80.0,1.60);
 		appointment = new Appointment(11, 12, "Eye test", patient1);
 	}
 

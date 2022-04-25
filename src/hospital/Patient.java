@@ -9,19 +9,20 @@ public class Patient {
 	private double weight; //in kilograms
 	private double height; //in meters
 	private String patientID;
+	private double underweightThreshold = 18.4;
+	private double overweightThreshold = 25.0;
 	private int beatsPerMin;
 	private int cholesterol; //in mg/dL
 	private int hemoglobin; //in g/dL
 	
-	
-	public Patient(String firstName, String lastName, int age, String sex, double weight, double height,String patientID) {
+	public Patient(String firstName, String lastName, int age, String sex, double weight, double height) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 		this.sex = sex;
 		this.weight = weight;
 		this.height = height;
-		this.patientID = patientID;
+		this.patientID = generatePatientId();
 	}
 	
 	public String getFirstName() {
@@ -64,6 +65,33 @@ public class Patient {
 				"Patient's Weight = " + this.weight + "\n" +
 				"Patient's Height = " + this.height + "\n" +
 				"Patient's ID = " + this.patientID;
+	}
+	
+	public String assessWeightClass() {
+		double BMI = this.calculateBMI();
+		String weightClass = "Something went wrong.";
+		if(BMI < underweightThreshold) {
+			weightClass = "This patient is underweight.";
+		} else if (BMI >= overweightThreshold) {
+			weightClass = "This patient is overweight.";
+		} else {
+			weightClass = "This patient is neither underweight nor overweight.";
+		}
+//		System.out.println(weightClass);
+		return weightClass;
+	}
+	
+	public String generatePatientId() {
+		String patient_Id="";
+		for(int i=0;i<4;i++) {
+			int randomNumber = (int)((Math.random() * 9) + 1);
+			patient_Id=patient_Id+Integer.toString(randomNumber);
+		}
+		return patient_Id;
+	}
+	
+	public void setPatientId(String ID) {
+		this.patientID = ID;
 	}
 
 	public void printPatient() {

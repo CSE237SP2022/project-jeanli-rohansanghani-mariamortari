@@ -26,7 +26,7 @@ class HospitalManagementSystemTest {
 	@Test
 	void testAddPatient() {
 		int numberPatientsBefore = patientList.size();
-		Patient newPatient = new Patient("bob","jones",36,"male",80,1.6,"1345");
+		Patient newPatient = new Patient("bob","jones",36,"male",80,1.6);
 		
 		hospital.addPatient(newPatient);
 		
@@ -37,10 +37,10 @@ class HospitalManagementSystemTest {
 	}
 	@Test
 	void testIsPatientIdUnique() {
-		Patient patient1 = new Patient("bob","jones",36,"male",80.0,1.60,"1345");
+		Patient patient1 = new Patient("bob","jones",36,"male",80.0,1.60);
 		patientList.add(patient1);
 		
-		Patient patient2 = new Patient("josh","jones",56,"male",80.0,1.60,"1345");
+		Patient patient2 = new Patient("josh","jones",56,"male",80.0,1.60);
 		String patient2_ID = patient2.getPatientId();
 
 		boolean isIdUnique = hospital.isPatientIdUnique(patient2_ID);
@@ -51,7 +51,7 @@ class HospitalManagementSystemTest {
 	
 	@Test
 	void testDeletePatient() {
-		Patient patient1 = new Patient("bob","jones",36,"male",80.0,1.60,"1345");
+		Patient patient1 = new Patient("bob","jones",36,"male",80.0,1.60);
 		patientList.add(patient1);
 		
 		int sizePatientListBeforeDeletion = patientList.size();
@@ -133,33 +133,12 @@ class HospitalManagementSystemTest {
 		assertEquals(1.6, height, 0.05);
 	}
 	
-	@Test
-	void testGeneratePatientId() {
-		String patientIdCreatedBySystem = hospital.generatePatientId();
-		Patient p1 = new Patient("bob","jones",36,"male",80.0,1.60,patientIdCreatedBySystem);	
-		
-		assertEquals(patientIdCreatedBySystem, p1.getPatientId());
-	}
-	
-	@Test
-	void testAssessWeightClassUnderweight() {
-		String weightClass = hospital.assessWeightClass(10.0);
-		
-		assertTrue(weightClass.equals("This patient is underweight."));
-	}
-	
-	@Test
-	void testAssessWeightClassOverweight() {
-		String weightClass = hospital.assessWeightClass(30.0);
-		
-		assertTrue(weightClass.equals("This patient is overweight."));
-	}
-	
-	@Test
-	void testAssessWeightClass() {
-		String weightClass = hospital.assessWeightClass(20.0);
-		
-		assertTrue(weightClass.equals("This patient is neither underweight nor overweight."));
-	}
+//	@Test
+//	void testGeneratePatientId() {
+//		String patientIdCreatedBySystem = hospital.generatePatientId();
+//		Patient p1 = new Patient("bob","jones",36,"male",80.0,1.60,patientIdCreatedBySystem);	
+//		
+//		assertEquals(patientIdCreatedBySystem, p1.getPatientId());
+//	}
 
 }

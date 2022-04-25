@@ -14,7 +14,7 @@ class PatientTest {
 	
 	@BeforeEach
 	void setup() {
-		p1 = new Patient("bob","jones",36,"male",80.0,1.60,"1345");
+		p1 = new Patient("bob","jones",36,"male",80.0,1.60);
 	}
 	
 	@Test
@@ -53,11 +53,12 @@ class PatientTest {
 		assertEquals(1.60,height,0.05);
 	}
 	
-	@Test 
-	void testGetPatientId() {
-		String id = p1.getPatientId();
-		assertEquals("1345",id);
-	}
+//	Doesn't work anymore as the ID is randomly generated, but getters do not need tests anyways
+//	@Test 
+//	void testGetPatientId() {
+//		String id = p1.getPatientId();
+//		assertEquals("1345",id);
+//	}
 	
 	@Test
 	void testCalculateBMI() {
@@ -73,8 +74,48 @@ class PatientTest {
 				"Patient's Sex = male" + "\n" +
 				"Patient's Weight = 80.0" + "\n" +
 				"Patient's Height = 1.6" + "\n" +
-				"Patient's ID = 1345";
+				"Patient's ID = " + p1.getPatientId();
 		
 		assertEquals(patientInfo, expected);
+	}
+	
+	@Test
+	void testAssessWeightClassUnderweight() {
+		p1 = new Patient("bob","jones",36,"male",10.0,1.60);
+		String weightClass = p1.assessWeightClass();
+		
+		assertTrue(weightClass.equals("This patient is underweight."));
+	}
+	
+	@Test
+	void testAssessWeightClassOverweight() {
+		p1 = new Patient("bob","jones",36,"male",160.0,1.60);
+		String weightClass = p1.assessWeightClass();
+		
+		assertTrue(weightClass.equals("This patient is overweight."));
+	}
+	
+	@Test
+	void testAssessWeightClass() {
+		p1 = new Patient("bob","jones",36,"male",60.0,1.60);
+		String weightClass = p1.assessWeightClass();
+		
+		assertTrue(weightClass.equals("This patient is neither underweight nor overweight."));
+	}
+	
+//	Can't easily test a method that returns a random value
+//	@Test
+//	void testGeneratePatientId() {
+//		String patientIdCreatedBySystem = p1.generatePatientId();
+//		Patient p1 = new Patient("bob","jones",36,"male",80.0,1.60);	
+//		
+//		assertEquals(patientIdCreatedBySystem, p1.getPatientId());
+//	}
+	
+	@Test
+	void testSetPatientId() {
+		p1.setPatientId("1345");
+		
+		assertEquals(p1.getPatientId(), "1345");
 	}
 }
