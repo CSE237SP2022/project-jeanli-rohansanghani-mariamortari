@@ -11,6 +11,9 @@ public class Patient {
 	private String patientID;
 	private double underweightThreshold = 18.4;
 	private double overweightThreshold = 25.0;
+	private int beatsPerMin;
+	private int cholesterol; //in mg/dL
+	private int hemoglobin; //in g/dL
 	
 	public Patient(String firstName, String lastName, int age, String sex, double weight, double height) {
 		this.firstName = firstName;
@@ -90,5 +93,43 @@ public class Patient {
 	public void setPatientId(String ID) {
 		this.patientID = ID;
 	}
+
+	public void printPatient() {
+		System.out.println(firstName);
+		System.out.println(lastName);
+		System.out.println(age);
+		System.out.println(sex);
+		System.out.println(weight);
+		System.out.println(height);
+		System.out.println(patientID);
+		System.out.println("");
+		
+	}
+
+	public void setHeartRate(int beatsPerMin) {
+		this.beatsPerMin = beatsPerMin;
+	}
+	public void setCholesterol(int cholesterol) {
+		this.cholesterol = cholesterol;
+	}
+	public void setHemoglobin(int hemoglobin) {
+		this.hemoglobin = hemoglobin;
+	}
+	public int getHeartRate() {
+		return this.beatsPerMin;
+	}
+	public int getCholesterol() {
+		return this.cholesterol;
+	}
+	public int getHemoglobin() {
+		return this.hemoglobin;
+	}
+	public void printLabResults(Patient patient) {
+		System.out.println("Patient's heart rate: "+patient.getHeartRate());
+		System.out.println("Patient's cholesterol: "+patient.getCholesterol());
+		System.out.println("Patient's hemoglobin: "+patient.getHemoglobin());
+		System.out.println("");
+	}
+	
 
 }
