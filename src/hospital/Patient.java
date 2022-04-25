@@ -77,7 +77,6 @@ public class Patient {
 		} else {
 			weightClass = "This patient is neither underweight nor overweight.";
 		}
-//		System.out.println(weightClass);
 		return weightClass;
 	}
 	
@@ -92,18 +91,6 @@ public class Patient {
 	
 	public void setPatientId(String ID) {
 		this.patientID = ID;
-	}
-
-	public void printPatient() {
-		System.out.println(firstName);
-		System.out.println(lastName);
-		System.out.println(age);
-		System.out.println(sex);
-		System.out.println(weight);
-		System.out.println(height);
-		System.out.println(patientID);
-		System.out.println("");
-		
 	}
 
 	public void setHeartRate(int beatsPerMin) {
