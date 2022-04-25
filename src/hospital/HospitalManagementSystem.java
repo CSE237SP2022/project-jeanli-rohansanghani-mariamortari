@@ -35,6 +35,7 @@ public class HospitalManagementSystem {
 		System.out.println("Select L to List current Patients in the System");
 		System.out.println("Select A to Add Patient to the System");
 		System.out.println("Select S to Search for a Patient in the System");
+		System.out.println("Select T to Add Lab Test Results for a Patient");
 		System.out.println("Select W to Assess the BMI of a Patient");
 		System.out.println("Select D to Delete Patient from the System");
 		System.out.println("Select X to exit Hospital System");
@@ -49,6 +50,9 @@ public class HospitalManagementSystem {
 		}
 		else if(input.equals("S")) {
 			searchPatient();
+    }
+		else if(input.equals("T")) {
+			enterLabTests();
 		}
 		else if(input.equals("W")) {
 			assessBMI();
@@ -261,6 +265,25 @@ public class HospitalManagementSystem {
 			}
 		}
 		return true;
+	}
+	public void enterLabTests() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Please type the ID number of the patient you wish to add lab test results for");
+		String patientIdUserInput = Integer.toString(in.nextInt());
+		for (Patient patient: patientList) {
+			if(patient.getPatientId().equals(patientIdUserInput)) {
+				System.out.println("Enter patient's heart rate in beats per minute");
+				int beatsPerMin = in.nextInt();
+				System.out.println("Enter patient's cholesterol in milligrams per deciliter");
+				int cholesterol = in.nextInt();
+				System.out.println("Enter patient's hemoglobin in grams per deciliter");
+				int hemoglobin = in.nextInt();
+				patient.setHeartRate(beatsPerMin);
+				patient.setCholesterol(cholesterol);
+				patient.setHemoglobin(hemoglobin);
+				patient.printLabResults(patient);
+			}
+		}
 	}
 	
 	public void searchPatient() {
