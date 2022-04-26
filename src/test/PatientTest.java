@@ -53,12 +53,12 @@ class PatientTest {
 		assertEquals(1.60,height,0.05);
 	}
 	
-//	Doesn't work anymore as the ID is randomly generated, but getters do not need tests anyways
-//	@Test 
-//	void testGetPatientId() {
-//		String id = p1.getPatientId();
-//		assertEquals("1345",id);
-//	}
+	@Test
+	void testSetPatientId() {
+		p1.setPatientId("1345");
+		
+		assertEquals(p1.getPatientId(), "1345");
+	}
 	
 	@Test
 	void testCalculateBMI() {
@@ -103,19 +103,12 @@ class PatientTest {
 		assertTrue(weightClass.equals("This patient is neither underweight nor overweight."));
 	}
 	
-//	Can't easily test a method that returns a random value
-//	@Test
-//	void testGeneratePatientId() {
-//		String patientIdCreatedBySystem = p1.generatePatientId();
-//		Patient p1 = new Patient("bob","jones",36,"male",80.0,1.60);	
-//		
-//		assertEquals(patientIdCreatedBySystem, p1.getPatientId());
-//	}
-	
 	@Test
-	void testSetPatientId() {
-		p1.setPatientId("1345");
+	void testGeneratePatientId() {
+		String generatedId = p1.generatePatientId();
 		
-		assertEquals(p1.getPatientId(), "1345");
+		assertTrue(!generatedId.equals(""));
 	}
+	
+	//Other methods in the Patient class do not have tests because either they just print information or are getters/setters
 }
