@@ -6,72 +6,11 @@ import java.util.Scanner;
 public class HospitalManagementSystem {
 	
 	private ArrayList<Patient> patientList;
-	private boolean keepGoing;
 	private Scanner in;
 	
-	public HospitalManagementSystem(ArrayList<Patient> patientList, boolean keepGoing) {
+	public HospitalManagementSystem(ArrayList<Patient> patientList) {
 		this.patientList = patientList;
-		this.keepGoing = keepGoing;
 		this.in = new Scanner(System.in);
-	}
-
-	public static void main(String[] args) {
-		ArrayList<Patient> patientList = new ArrayList<Patient>();
-		HospitalManagementSystem hospital = new HospitalManagementSystem(patientList, true);
-		
-		while(hospital.keepGoing) {
-			hospital.menuControls();
-		}
-		if(hospital.keepGoing == false) {
-			System.out.println("Hospital Management System Session Closed");
-		}
-		
-	}
-	
-	public void menuControls() {
-		System.out.println("-------------------------------------------------------");
-		System.out.println("Hospital Management System");
-		System.out.println("Select L to List current Patients in the System");
-		System.out.println("Select A to Add Patient to the System");
-		System.out.println("Select S to Search for a Patient in the System");
-		System.out.println("Select T to Add Lab Test Results for a Patient");
-		System.out.println("Select W to Assess the BMI of a Patient");
-		System.out.println("Select D to Delete Patient from the System");
-		System.out.println("Select X to exit Hospital System");
-
-		
-		String input = in.nextLine();
-		if(input.equals("L")) {
-			printPatientList();
-		}
-		else if(input.equals("A")) {
-			Patient newPatient = generatePatient();
-			addPatient(newPatient);
-		}
-		else if(input.equals("S")) {
-			searchPatient();
-    }
-		else if(input.equals("T")) {
-			enterLabTests();
-		}
-		else if(input.equals("W")) {
-			Patient patient = getPatientFromId(getIdFromInput());
-			if(patient != null) {
-				System.out.println(patient.assessWeightClass());
-			} else {
-				System.out.println("Something went wrong. Make sure you entered a valid ID.");
-			}
-		}
-		else if(input.equals("D")) {
-			deletePatient(getIdFromInput());
-		}
-		else if(input.equals("X")) {
-			keepGoing = false;
-		}
-		else {
-			System.out.println("Invalid Input. Please try again.");
-		}
-		
 	}
 	
 	public Patient generatePatient() {
@@ -80,31 +19,45 @@ public class HospitalManagementSystem {
 		System.out.println("Enter Patient's Last Name");
 		String patientLastName = in.next();
 		System.out.println("Enter Patient's Age");
-		while (!in.hasNextInt()) { System.out.println("Enter integer values only");in.next();} int patientAge = in.nextInt();
+		int patientAge = getIntFromInput();
 		System.out.println("Enter Patient's Sex");
 		String patientSex = in.next();
 		System.out.println("Enter Patient's Weight (in kilograms)");
-		while (!in.hasNextDouble()) { System.out.println("Value not accepted. Please enter a number");in.next();} double patientWeight = in.nextDouble();
+		double patientWeight = getDoubleFromInput();
 		System.out.println("Enter Patient's Height (in meters)");
-		while (!in.hasNextDouble()) { System.out.println("Value not accepted. Please enter a number");in.next();} double patientHeight = in.nextDouble();
+		double patientHeight = getDoubleFromInput();
 		Patient patient = new Patient(patientFirstName,patientLastName,patientAge,patientSex,patientWeight,patientHeight);
 		return patient;	
 	}
 	
+	public int getIntFromInput() {
+		while (!in.hasNextInt()) { 
+			System.out.println("Enter integer values only");
+			in.next();
+		} 
+		return in.nextInt();
+	}
+	
+	public double getDoubleFromInput() {
+		while (!in.hasNextDouble()) { 
+			System.out.println("Value not accepted. Please enter a number");
+			in.next();
+		} 
+		return in.nextDouble();
+	}
+	
 	public String getIdFromInput() {
 		if(patientList.isEmpty()) {
-			System.out.println("Unable to conduct this action since there are no patients currently in the system. Please add a patient to the system in order to execute this command.");
-			System.out.println("");
-			System.out.println("");
+			System.out.println("Unable to conduct this action since there are no patients currently in the system. Please add a patient to the system in order to execute this command.\n\n");
 			return null;
 		}else {
 			printPatientList();
-			System.out.println("");
-			System.out.println("Please type the ID number of the patient you wish to conduct this action on from the system");
+			System.out.println("\nPlease type the ID number of the patient you wish to conduct this action on from the system");
 			String patientIdUserInput = Integer.toString(in.nextInt());
 			return patientIdUserInput;
 		}
 	}
+	
 	public Patient getPatientFromId(String id) {
 		Patient patient = null;
 		for (Patient val: patientList) {
@@ -118,7 +71,6 @@ public class HospitalManagementSystem {
 	public void addPatient(Patient newPatient) {
 		patientList.add(newPatient);
 		printPatientList();
-		
 	}
 	
 	public void deletePatient(String IdToDelete) {
@@ -132,31 +84,21 @@ public class HospitalManagementSystem {
 		}if(changed) {
 			String removedPatientName = patientList.get(indexDelete).getFirstName() + " " + patientList.get(indexDelete).getLastName();
 			patientList.remove(indexDelete);
-			System.out.println("Patient " + removedPatientName + " has been deleted from the system");
-			System.out.println("");
-			System.out.println("");
+			System.out.println("Patient " + removedPatientName + " has been deleted from the system \n\n");
 		}
 	}
 	
 	public void printPatientList() {
-		System.out.println("");
-		System.out.println("");
-		System.out.println("List of Patients in the System: ");
+		System.out.println("\n\nList of Patients in the System: ");
 		if(patientList.size() > 0) {
 			int counter = 1;
 			for(Patient patient: patientList) {
-				if(patient!=null) {
-					System.out.println(counter + ". ");
-					System.out.println(patient.toString());
-					counter += 1;
-					System.out.println("");
-					System.out.println("");
-				}
+				System.out.println(counter + ". ");
+				System.out.println(patient.toString());
+				counter += 1;
 			}
 		} else {
-			System.out.println("There are no patients in the system.");
-			System.out.println("");
-			System.out.println("");
+			System.out.println("There are no patients in the system.\n\n");
 		}
 	}
 	
@@ -168,20 +110,19 @@ public class HospitalManagementSystem {
 		}
 		return true;
 	}
+	
 	public void enterLabTests() {
 		System.out.println("Please type the ID number of the patient you wish to add lab test results for");
 		String patientIdUserInput = Integer.toString(in.nextInt());
 		for (Patient patient: patientList) {
 			if(patient.getPatientId().equals(patientIdUserInput)) {
 				System.out.println("Enter patient's heart rate in beats per minute");
-				int beatsPerMin = in.nextInt();
+				while (!in.hasNextInt()) { System.out.println("Enter integer values only");in.next();}
+				patient.setHeartRate(in.nextInt());
 				System.out.println("Enter patient's cholesterol in milligrams per deciliter");
-				int cholesterol = in.nextInt();
+				patient.setCholesterol(in.nextInt());
 				System.out.println("Enter patient's hemoglobin in grams per deciliter");
-				int hemoglobin = in.nextInt();
-				patient.setHeartRate(beatsPerMin);
-				patient.setCholesterol(cholesterol);
-				patient.setHemoglobin(hemoglobin);
+				patient.setHemoglobin(in.nextInt());
 				patient.printLabResults(patient);
 			}
 		}
@@ -194,14 +135,12 @@ public class HospitalManagementSystem {
 		for( Patient patient:patientList) {
 			if(patient.getFirstName().equals(searchPatientName)) {
 				found=true;
-				patient.toString();
+				System.out.println(patient.toString());
 			}
 		}
 		if(found == false) {
 			System.out.println("There are no patients in the system with this name");
 		}
-		
-		
 	}
 	
 }

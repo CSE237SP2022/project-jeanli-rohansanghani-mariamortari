@@ -64,7 +64,7 @@ public class Patient {
 				"Patient's Sex = " + this.sex + "\n" +
 				"Patient's Weight = " + this.weight + "\n" +
 				"Patient's Height = " + this.height + "\n" +
-				"Patient's ID = " + this.patientID;
+				"Patient's ID = " + this.patientID + "\n";
 	}
 	
 	public String assessWeightClass() {
@@ -96,27 +96,32 @@ public class Patient {
 	public void setHeartRate(int beatsPerMin) {
 		this.beatsPerMin = beatsPerMin;
 	}
+	
 	public void setCholesterol(int cholesterol) {
 		this.cholesterol = cholesterol;
 	}
+	
 	public void setHemoglobin(int hemoglobin) {
 		this.hemoglobin = hemoglobin;
 	}
+	
 	public int getHeartRate() {
 		return this.beatsPerMin;
 	}
+	
 	public int getCholesterol() {
 		return this.cholesterol;
 	}
+	
 	public int getHemoglobin() {
 		return this.hemoglobin;
 	}
+	
 	public void printLabResults(Patient patient) {
-		System.out.println("Patient's heart rate: "+patient.getHeartRate());
-		System.out.println("Patient's cholesterol: "+patient.getCholesterol());
-		System.out.println("Patient's hemoglobin: "+patient.getHemoglobin());
+		System.out.println("Patient's heart rate: "+ patient.getHeartRate());
+		System.out.println("Patient's cholesterol: "+ patient.getCholesterol());
+		System.out.println("Patient's hemoglobin: "+ patient.getHemoglobin());
 		System.out.println("");
 	}
 	
-
 }
