@@ -8,9 +8,8 @@ By: Jean Li, Maria Mortari, Rohan Sanghani
 
 ### What user stories were completed this iteration?
 
-* A Hospital Management Menu Class was created
-* Hospital Management System Class was shortened - fewer methods and methods were trimmed
-* assessBMI and generatePatientID were moved to Patient class
+* A user can search patient by first name
+* A user can store and retrieve lab results
 
 
 
@@ -26,7 +25,7 @@ By: Jean Li, Maria Mortari, Rohan Sanghani
 
 ### Is there anything that you implemented but doesn't currently work?
 
-* A basic appointment class was created but it was not implemented. In other words, it exists but doesn't do anything. We ultimately decided to keep it this way for this iteration and focus on cleaning up our Hospital Management System class.
+* A basic appointment class was created but it was not implemented. In other words, it exists but doesn't do anything. We ultimately decided to keep it this way for this iteration and focus on cleaning up our Hospital Management System class and creating a Hospital Management Menu class.
 * Our Hospital Management Menu class doesnt have unit tests because it essentially just prints and calls on other methods
 
 
