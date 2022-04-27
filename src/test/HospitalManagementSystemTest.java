@@ -15,6 +15,8 @@ class HospitalManagementSystemTest {
 	
 	private HospitalManagementSystem hospital;
 	private ArrayList<Patient> patientList;
+	private Patient patient1;
+	private Patient patient2;
 	
 	@BeforeEach 
 	void setup() {
@@ -93,6 +95,8 @@ class HospitalManagementSystemTest {
 	}
 	@Test 
 	void testGeneratePatient() {
+		System.out.println("\n ******BEGINNING OF A NEW TEST****** \n");
+		System.out.println("FOR THIS TEST, PLEASE ANSWER THE PROMPTS BELOW TO CREATE A NEW PATIENT \n");
 		Patient patient = hospital.generatePatient();
 		
 		//Tests if generatePatient() method is able to create an object of type 'Patient'
@@ -102,6 +106,7 @@ class HospitalManagementSystemTest {
 	
 	@Test
 	void testEnterLabTests() {
+		System.out.println("\n ******BEGINNING OF A NEW TEST****** \n");
 		Patient patient1 = new Patient("bob","jones",36,"male",80.0,1.60);
 		String patient1_ID = patient1.getPatientId();
 		patientList.add(patient1);
@@ -113,7 +118,48 @@ class HospitalManagementSystemTest {
 		assertEquals(patient1.getHemoglobin(),50);
 	}
 	
-	
+	@Test
+	// Hospital Management System will only add patient to the patientList if the patient
+	// has a unique ID
+	void testAddPatientsWithSameId() {
+		patient1 =  new Patient("bob","jones",36,"male",80.0,1.60);
+		patient1.setPatientId("1111");
+		
+		hospital.addPatient(patient1);
+		
+		int sizePatientListBefore = patientList.size();
+		
+		patient2 = new Patient("marie","terry",40,"female",70.0,1.90);
+		patient2.setPatientId("1111");
+		
+		hospital.addPatient(patient2);
+		
+		int sizePatientListAfter = patientList.size();
+		
+		assertEquals(1,sizePatientListAfter);
+		assertEquals(sizePatientListBefore,sizePatientListAfter);
+
+	}
+	@Test
+	//If there is an attempt to add two patients with the same ID to the system, the system
+	//will be able to accept only one patient with that ID, as no two patients can have 
+	// the same id. Thus, the getPatientFromId() method should be able to return only one patient.  
+	void testGetOnlyOnePatientFromId() {
+		String sameId = "1111";
+		patient1 =  new Patient("bob","jones",36,"male",80.0,1.60);
+		patient1.setPatientId(sameId);
+		
+		patient2 = new Patient("marie","terry",40,"female",70.0,1.90);
+		patient2.setPatientId(sameId);
+		
+		hospital.addPatient(patient1);
+		hospital.addPatient(patient2);
+		
+		Patient retrievedPatient = hospital.getPatientFromId(sameId);
+		
+		assertEquals(patient1,retrievedPatient);
+		
+	}
 	
 	//Other methods in the HospitalManagementClass not tested either just get an input from the user or just prints information.
 	

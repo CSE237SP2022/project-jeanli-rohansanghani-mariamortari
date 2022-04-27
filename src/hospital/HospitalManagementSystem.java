@@ -38,6 +38,16 @@ public class HospitalManagementSystem {
 		return in.nextInt();
 	}
 	
+	public void assessPatientBMI() {
+		Patient patient = getPatientFromId(getIdFromInput());
+		if(patient != null) {
+			System.out.println("This Patient's BMI is: " + patient.calculateBMI());
+			System.out.println(patient.assessWeightClass());
+		} else {
+			System.out.println("Something went wrong. Make sure you entered a valid ID.");
+		}
+	}
+	
 	public double getDoubleFromInput() {
 		while (!in.hasNextDouble()) { 
 			System.out.println("Value not accepted. Please enter a number");
@@ -69,8 +79,9 @@ public class HospitalManagementSystem {
 	}
 	
 	public void addPatient(Patient newPatient) {
-		patientList.add(newPatient);
-		printPatientList();
+		if(isPatientIdUnique(newPatient.getPatientId())) {
+			patientList.add(newPatient);
+		}
 	}
 	
 	public void deletePatient(String IdToDelete) {
@@ -112,18 +123,23 @@ public class HospitalManagementSystem {
 	}
 	
 	public void enterLabTests() {
-		System.out.println("Please type the ID number of the patient you wish to add lab test results for");
-		String patientIdUserInput = Integer.toString(in.nextInt());
-		for (Patient patient: patientList) {
-			if(patient.getPatientId().equals(patientIdUserInput)) {
-				System.out.println("Enter patient's heart rate in beats per minute");
-				while (!in.hasNextInt()) { System.out.println("Enter integer values only");in.next();}
-				patient.setHeartRate(in.nextInt());
-				System.out.println("Enter patient's cholesterol in milligrams per deciliter");
-				patient.setCholesterol(in.nextInt());
-				System.out.println("Enter patient's hemoglobin in grams per deciliter");
-				patient.setHemoglobin(in.nextInt());
-				patient.printLabResults(patient);
+		if(patientList.isEmpty()) {
+			System.out.println("Unable to conduct this action since there are no patients currently in the system. Please add a patient to the system in order to execute this command.\n\n");
+		}
+		else{
+			System.out.println("Please type the ID number of the patient you wish to add lab test results for");
+			String patientIdUserInput = Integer.toString(in.nextInt());
+			for (Patient patient: patientList) {
+				if(patient.getPatientId().equals(patientIdUserInput)) {
+					System.out.println("Enter patient's heart rate in beats per minute");
+					while (!in.hasNextInt()) { System.out.println("Enter integer values only");in.next();}
+					patient.setHeartRate(in.nextInt());
+					System.out.println("Enter patient's cholesterol in milligrams per deciliter");
+					patient.setCholesterol(in.nextInt());
+					System.out.println("Enter patient's hemoglobin in grams per deciliter");
+					patient.setHemoglobin(in.nextInt());
+					patient.printLabResults(patient);
+				}
 			}
 		}
 	}
@@ -141,6 +157,20 @@ public class HospitalManagementSystem {
 		if(found == false) {
 			System.out.println("There are no patients in the system with this name");
 		}
+	}
+	
+	public void printLabTests() {
+		if(patientList.isEmpty()) {
+			System.out.println("Unable to conduct this action since there are no patients currently in the system. Please add a patient to the system in order to execute this command.\n\n");
+		}
+		else{
+			for(Patient patient:patientList) {
+				System.out.println((patientList.indexOf(patient)+1)+")");
+				System.out.println(patient.toString());
+				patient.printLabResults(patient);
+			}
+		}
+		
 	}
 	
 }
