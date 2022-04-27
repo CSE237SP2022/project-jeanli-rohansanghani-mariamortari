@@ -116,6 +116,7 @@ public class Patient {
 	public int getHemoglobin() {
 		return this.hemoglobin;
 	}
+
 	
 	public void printLabResults(Patient patient) {
 		System.out.println("Patient's heart rate: "+ patient.getHeartRate());
@@ -123,5 +124,6 @@ public class Patient {
 		System.out.println("Patient's hemoglobin: "+ patient.getHemoglobin());
 		System.out.println("");
 	}
+
 	
 }
