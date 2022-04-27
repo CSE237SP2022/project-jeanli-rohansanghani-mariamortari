@@ -27,5 +27,6 @@ By: Jean Li, Maria Mortari, Rohan Sanghani
 ### Is there anything that you implemented but doesn't currently work?
 
 * A basic appointment class was created but it was not implemented. In other words, it exists but doesn't do anything. We ultimately decided to keep it this way for this iteration and focus on cleaning up our Hospital Management System class.
+* Our Hospital Management Menu class doesnt have unit tests because it essentially just prints and calls on other methods
 
 
