@@ -1,9 +1,6 @@
 package hospital;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class HospitalManagementMenu {
